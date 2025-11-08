@@ -9,7 +9,7 @@ test.describe('Email Client Sign-in Tests', () => {
   // Test configuration - update these values for your specific email client
   const EMAIL_CLIENT_URL = 'https://www.seznam.cz'; // Replace with your email client URL
   const TEST_EMAIL = 'testingEmail12345@seznam.cz'; // Replace with test email
-  const TEST_PASSWORD = ''; // Replace with test password
+  const TEST_PASSWORD = process.env.TEST_EMAIL_PASSWORD; // Replace with test password
 
   test.beforeEach(async ({context,  page }) => {
     // Navigate to the email client login page before each test
@@ -30,6 +30,7 @@ test.describe('Email Client Sign-in Tests', () => {
 
 
   const passwordInput = newPage.locator('#login-password');
+  console.log('Using password:', TEST_PASSWORD);
   await passwordInput.fill(TEST_PASSWORD);
 
   await newPage.locator('button[type="submit"][data-locale="login.submit"][data-arrow-down="#login-username"]').click();
